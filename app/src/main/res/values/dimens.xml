@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--margin and padding-->
+    <dimen name="margin_0">0dp</dimen>
+    <dimen name="margin_1">1dp</dimen>
+
+    <dimen name="ic_icon_size">@dimen/_24sdp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+
+
+
+</resources>
