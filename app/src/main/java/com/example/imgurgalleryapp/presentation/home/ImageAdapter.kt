@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.imgurgalleryapp.R
 import com.example.imgurgalleryapp.domain.model.Image
 import kotlinx.android.synthetic.main.item_image_cell.view.*
-
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     private var items: List<Image> = ArrayList()

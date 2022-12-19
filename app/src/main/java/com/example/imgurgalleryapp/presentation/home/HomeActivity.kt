@@ -34,7 +34,7 @@ class HomeActivity : BaseActivity<HomeViewModel>(), HomeListener {
     private fun init() {
         progressBar.show()
         if (NetworkUtil.isConnectedToInternet(applicationContext))
-            viewModel.getGalleryImages("hot", "viral", "top")
+            viewModel.getGalleryImages("top", "week")
         else
             viewModel.getCachedGalleryImages()
     }

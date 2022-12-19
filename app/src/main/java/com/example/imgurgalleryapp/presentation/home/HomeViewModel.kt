@@ -4,6 +4,7 @@ import com.example.imgurgalleryapp.data.mapper.ImageMapper
 import com.example.imgurgalleryapp.data.repository.ImageRepository
 import com.example.imgurgalleryapp.presentation.base.BaseViewModel
 import com.example.imgurgalleryapp.presentation.util.Coroutines
+import timber.log.Timber
 
 
 class HomeViewModel(
@@ -12,11 +13,13 @@ class HomeViewModel(
 
     var homeListener: HomeListener? = null
 
-    fun getGalleryImages(section: String, sort: String, window: String) {
+    fun getGalleryImages(sort: String, window: String) {
         Coroutines.main {
-            val response = repository.galleryImages(section, sort, window)
+            val response = repository.galleryImages(sort, window)
             if (response.isSuccessful) {
+                Timber.d("${response.code()}: ${response.body()}")
                 response.body()?.data?.let {
+                    Timber.d("Response:  $it}")
                     val result = it.map { imgMap ->
                         ImageMapper.convertData(imgMap)
                     }
@@ -24,8 +27,11 @@ class HomeViewModel(
                     repository.saveImages(result)
                     return@main
                 }
-            } else
+            } else{
+                Timber.d("${response.code()}: ${response.message()}")
                 homeListener?.onFailure("Error Code: ${response.code()}")
+            }
+
         }
 
     }
