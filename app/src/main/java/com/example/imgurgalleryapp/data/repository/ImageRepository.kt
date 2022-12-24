@@ -4,7 +4,6 @@ import com.example.imgurgalleryapp.data.api.ImageApi
 import com.example.imgurgalleryapp.data.model.HomeResponse
 import com.example.imgurgalleryapp.domain.model.Image
 import com.example.imgurgalleryapp.data.db.AppDatabase
-import com.example.imgurgalleryapp.presentation.util.Constants
 import retrofit2.Response
 
 class ImageRepository(
