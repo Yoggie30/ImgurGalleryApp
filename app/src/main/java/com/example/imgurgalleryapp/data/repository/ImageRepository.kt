@@ -15,7 +15,7 @@ class ImageRepository(
         window: String
     ): Response<HomeResponse> {
         return api.getGalleryImages(
-            sort = sort, window = window, page = 1
+            sort = sort, window = window, page = 0
         )
     }
 

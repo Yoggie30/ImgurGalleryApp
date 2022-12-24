@@ -25,7 +25,6 @@ interface ImageApi {
 
     companion object {
         operator fun invoke(): ImageApi {
-            Timber.e("Base URL: ${Constants.BASE_URL}")
             return Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

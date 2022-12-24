@@ -17,6 +17,7 @@ object ImageMapper {
             ups = imageResponse.ups,
             downs = imageResponse.downs,
             score = imageResponse.score,
+            imagesCount = imageResponse.imagesCount,
             imageUrl = imageResponse.images?.get(0)?.link
         )
     }

@@ -1,8 +1,10 @@
 package com.example.imgurgalleryapp.presentation.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.imgurgalleryapp.R
@@ -32,6 +34,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
         this.listener = listener
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<Image>) {
         this.items = items
         notifyDataSetChanged()
@@ -39,7 +42,6 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     inner class ImageViewHolder internal constructor(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-
         fun bind(img: Image) {
             itemView.apply {
                 tvImageDesc.text = img.title
@@ -47,8 +49,9 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
                     R.string.label_image_date,
                     img.date
                 )
-                tvImageDesc.tvDate.text = date
-                Glide.with(context).load(img.imageUrl?:resources.getDrawable(R.mipmap.ic_launcher_round)).into(imageView)
+                tvDate.text = date
+                tvNoOfImage.text= img.imagesCount.toString()
+                Glide.with(context).load(img.imageUrl?:ContextCompat.getDrawable(context,R.mipmap.ic_launcher_round)).into(imageView)
                 setOnClickListener { listener?.invoke(img) }
             }
         }

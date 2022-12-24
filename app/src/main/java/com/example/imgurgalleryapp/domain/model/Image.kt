@@ -22,5 +22,6 @@ data class Image(
     var ups: Int? = null,
     var downs: Int? = null,
     var score: Int? = null,
+    var imagesCount: Int? = null,
     var imageUrl: String? = null
 ) : Parcelable
