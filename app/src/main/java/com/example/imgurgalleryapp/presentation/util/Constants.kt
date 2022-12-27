@@ -5,7 +5,7 @@ import java.util.*
 
 object Constants {
     const val LIST_COUNT = 1
-    const val GRID_COUNT = 3
+    const val GRID_COUNT = 2
 
     const val BASE_URL = "https://api.imgur.com/3/"
     const val CLIENT_ID = "607807a177913e7"

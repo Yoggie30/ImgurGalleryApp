@@ -17,9 +17,10 @@ class HomeViewModel(
         Coroutines.main {
             val response = repository.galleryImages(sort, window)
             if (response.isSuccessful) {
-                Timber.d("${response.code()}: ${response.body()}")
+                Timber.e("Response: ${response.code()}: ${response.body()}")
+
                 response.body()?.data?.let {
-                    Timber.d("Response:  $it}")
+                    Timber.e("Response data:  $it}")
                     val result = it.map { imgMap ->
                         ImageMapper.convertData(imgMap)
                     }
@@ -29,7 +30,7 @@ class HomeViewModel(
                 }
             } else{
                 Timber.d("${response.code()}: ${response.message()}")
-                homeListener?.onFailure("Error Code: ${response.code()}")
+                homeListener?.onFailure("Error Code: ${response.code() } ${response.message()}")
             }
 
         }

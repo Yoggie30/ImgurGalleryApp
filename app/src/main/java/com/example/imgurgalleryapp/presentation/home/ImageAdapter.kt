@@ -47,7 +47,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
         RecyclerView.ViewHolder(itemView) {
         fun bind(img: Image) {
             itemView.apply {
-                tvImageDesc.text = img.title
+                tvTitle.text = img.title
                 val date = resources.getString(
                     R.string.label_image_date,
                     img.date
@@ -57,7 +57,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
                 Glide.with(context).load(
                     img.imageUrl ?: ContextCompat.getDrawable(
                         context,
-                        R.mipmap.ic_launcher_round
+                        R.drawable.ic_launcher_background
                     )
                 ).into(imageView)
                 setOnClickListener { listener?.invoke(img) }

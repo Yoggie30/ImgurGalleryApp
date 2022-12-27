@@ -4,7 +4,6 @@ package com.example.imgurgalleryapp.presentation.home
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +15,7 @@ import com.example.imgurgalleryapp.domain.model.Image
 import com.example.imgurgalleryapp.presentation.base.BaseActivity
 import com.example.imgurgalleryapp.presentation.util.*
 import kotlinx.android.synthetic.main.activity_home.*
+
 
 class HomeActivity : BaseActivity<HomeViewModel>(), HomeListener {
     private val imageAdapter: ImageAdapter by lazy {
@@ -30,14 +30,13 @@ class HomeActivity : BaseActivity<HomeViewModel>(), HomeListener {
 
     override fun getLayoutResource() = R.layout.activity_home
 
-
     private fun init() {
         progressBar.show()
-        if (NetworkUtil.isConnectedToInternet(applicationContext))
+        if (NetworkUtil.isConnectedToInternet(applicationContext)) {
             viewModel.getGalleryImages("top", "week")
-        else
+        } else {
             viewModel.getCachedGalleryImages()
-
+        }
         populateListView()
     }
 
@@ -45,27 +44,34 @@ class HomeActivity : BaseActivity<HomeViewModel>(), HomeListener {
         viewModel.homeListener = this
     }
 
+
     private fun populateListView() {
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = imageAdapter
+
     }
 
     private fun populateGridView() {
         val gridLayoutManager = GridLayoutManager(this, Constants.GRID_COUNT)
         recyclerView.layoutManager = gridLayoutManager
         recyclerView.adapter = imageAdapter
+
     }
 
 
     override fun onSuccess(imgList: List<Image>) {
         progressBar.hide()
-        imageAdapter.setItems(imgList)
+        if (imgList.isEmpty()) {
+            showAlert(getString(R.string.label_no_data_found))
+        } else {
+            imageAdapter.setItems(imgList)
+        }
     }
 
     override fun onFailure(message: String) {
         progressBar.hide()
-        toast(message)
+        showAlert(message)
     }
 
     override fun createdViewModel(): HomeViewModel {
@@ -91,7 +97,7 @@ class HomeActivity : BaseActivity<HomeViewModel>(), HomeListener {
                     populateListView()
                     item.title = getString(R.string.label_grid)
                 }
-                imageAdapter.notifyItemRangeChanged(0, imageAdapter.itemCount ?: 0)
+                imageAdapter.notifyItemRangeChanged(0, imageAdapter.itemCount)
             }
         }
         return super.onOptionsItemSelected(item)
