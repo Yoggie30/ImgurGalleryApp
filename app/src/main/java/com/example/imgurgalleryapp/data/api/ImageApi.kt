@@ -15,7 +15,8 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 interface ImageApi {
-    @GET("gallery/search/{sort}/{window}/{page}")
+    //@GET("gallery/search/{sort}/{window}/{page}")
+    @GET("gallery/{sort}/{window}/{page}.json")
     suspend fun getGalleryImages(
         @Path("sort") sort: String,
         @Path("window") window: String,

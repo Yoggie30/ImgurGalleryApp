@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.imgurgalleryapp.R
 import com.example.imgurgalleryapp.domain.model.Image
 import kotlinx.android.synthetic.main.item_image_cell.view.*
+
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     private var items: List<Image> = ArrayList()
@@ -22,12 +23,14 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val image = items[position]
-        holder.bind(image)
+        if (items.isNotEmpty()) {
+            val image = items[position]
+            holder.bind(image)
+        }
     }
 
     override fun getItemCount(): Int {
-        return if (items.isEmpty()) 5 else items.size
+        return items.size
     }
 
     fun setImageClickListener(listener: (Image) -> Unit) {
@@ -50,8 +53,13 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
                     img.date
                 )
                 tvDate.text = date
-                tvNoOfImage.text= img.imagesCount.toString()
-                Glide.with(context).load(img.imageUrl?:ContextCompat.getDrawable(context,R.mipmap.ic_launcher_round)).into(imageView)
+                tvNoOfImage.text = img.imagesCount.toString()
+                Glide.with(context).load(
+                    img.imageUrl ?: ContextCompat.getDrawable(
+                        context,
+                        R.mipmap.ic_launcher_round
+                    )
+                ).into(imageView)
                 setOnClickListener { listener?.invoke(img) }
             }
         }

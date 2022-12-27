@@ -37,6 +37,8 @@ class HomeActivity : BaseActivity<HomeViewModel>(), HomeListener {
             viewModel.getGalleryImages("top", "week")
         else
             viewModel.getCachedGalleryImages()
+
+        populateListView()
     }
 
     private fun setEvents() {
